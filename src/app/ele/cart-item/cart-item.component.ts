@@ -16,8 +16,5 @@ export class CartItemComponent {
   constructor(private store: Store<appState>) { }
 
 
-  removeProduct(product: IProduct) {
-    this.store.dispatch(removeFromCart({ product }));
-  }
-  @Input() product!: IProduct;
+
 }
