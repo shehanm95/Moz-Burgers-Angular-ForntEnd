@@ -1,0 +1,41 @@
+<div class="container mt-5  mytable">
+    <h2 class="mb-4">Shopping Cart</h2>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Subtotal</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <app-cart-item class="container-fluid" *ngFor="let product of (products$ | async)"
+                [product]="product"></app-cart-item>
+
+            <tr>
+                <td colspan="4" class="text-right"><strong>Total:</strong></td>
+                <td>$25.00</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="container d-flex justify-content-between mt-3">
+    <a href="#" class="btn btn-secondary">Continue Shopping</a>
+    <a href="#" class="btn btn-primary">Checkout</a>
+</div>
+
+<style>
+    tr {
+        border: 1px solid #ccc;
+    }
+
+    td {
+        height: 100%;
+    }
+</style>
+
+<button routerLink="/">go to Home</button>

@@ -1,0 +1,48 @@
+<nav class="container-fluid navbar-dark bg-dark">
+    <nav class="container navbar navbar-dark navbar-expand-lg">
+        <a class="navbar-brand flex-grow-1" routerLink="/">Moz Burgers</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/">Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/customers">customers</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link d-flex" routerLink="/cart">Cart <div
+                        class="ms-2 d-inline-block d-flex justify-content-center align-items-center bg-primary qSquare">
+                        <div class="text-light fw-semibold">{{quantity}}</div>
+                    </div></a>
+            </li>
+        </ul>
+
+    </nav>
+</nav>
+
+
+
+<style>
+    ul li a {
+        color: white !important;
+    }
+
+    .qSquare {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .qSquare p {
+        line-height: 1;
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+    }
+</style>

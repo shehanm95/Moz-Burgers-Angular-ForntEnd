@@ -1,0 +1,3 @@
+<ng-content *ngFor="let product of (products| async)">
+    <app-product [product]="product" (handleAdd)="addToCart($event)"></app-product>
+</ng-content>

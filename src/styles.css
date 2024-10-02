@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+.mainSide {
+    display: inline-block;
+    width: 50%;
+    min-height: 50vh;
+}
+
+.check {
+    border: 1px solid red;
+}
+
+.flex {
+    display: flex;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
