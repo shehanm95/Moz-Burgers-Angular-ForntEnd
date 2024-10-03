@@ -23,7 +23,7 @@ export class NavComponent {
       this.products = products;
       this.quantity = 0;
       products.forEach(product => {
-        this.quantity += product.quantity;
+        this.quantity += product.cartQuantity;
       });
     })
   }

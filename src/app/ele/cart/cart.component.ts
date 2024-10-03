@@ -7,7 +7,7 @@ import { AsyncPipe, CommonModule, JsonPipe, NgTemplateOutlet } from '@angular/co
 import { CartItemComponent } from "../cart-item/cart-item.component";
 import { Observable, of } from 'rxjs';
 import { RouterLink } from '@angular/router';
-import { removeFromCart } from '../../state/cartState/cart.action';
+import { addToCart, removeFromCart } from '../../state/cartState/cart.action';
 
 @Component({
   selector: 'app-cart',
@@ -24,11 +24,14 @@ export class CartComponent {
     this.products$.subscribe(products => {
       this.length = products.length;
     });
-
   }
 
+  makeQuantityChange($event: Event, product: IProduct) {
+    this.store.dispatch(addToCart({ product }));
+  }
 
   removeProduct(product: IProduct) {
+
     this.store.dispatch(removeFromCart({ product }));
   }
   @Input() product!: IProduct;

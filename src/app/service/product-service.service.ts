@@ -5,20 +5,35 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductServiceService {
 
-  private apiUrl = 'http://localhost:8080/product/all';
+
+
 
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(this.apiUrl);
+    const apiUrl = productBaseUrl + '/all';
+    return this.http.get<IProduct[]>(apiUrl);
+  }
+
+  getProductById(productId: string): Observable<IProduct> {
+    const apiUrl = productBaseUrl + '/get/' + productId;
+    return this.http.get<IProduct>(apiUrl);
+
   }
 }
 
+
+export const productBaseUrl: string = "http://localhost:8080/product";
 export interface IProduct {
   id: number,
   name: string,
   quantity: number,
   price: number
+  cartQuantity: number,
+  description: string,
+  category: string,
+  imagePath: string
 }

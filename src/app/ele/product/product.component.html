@@ -1,13 +1,15 @@
 <div class="product-card d-inline-block container mt-5 mx-2">
     <div class="card" style="width: 18rem;">
-        <img src="" class="card-img-top" alt="Product Image">
+        <img [src]="productBaseUrl+'/getImage/'+product.imagePath" class="card-img-top" alt="{{product.imagePath}}">
         <div class="card-body">
 
             <h5 class="card-title">{{product.name}}</h5>
+            <p>cart quantity : {{product.cartQuantity}}</p>
+            <p> quantity : {{product.quantity}}</p>
             <p class="card-text">description is here
             </p>
             <div class="d-flex justify-content-between">
-                <a href="#" class="btn btn-primary">View Details</a>
+                <a (click)="viewProduct(product.id)" class="btn btn-primary">View Details</a>
                 <a (click)="addToCart(product)" class="btn btn-primary">Add to Cart</a>
             </div>
         </div>
