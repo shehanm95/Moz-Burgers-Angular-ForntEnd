@@ -1,0 +1,21 @@
+<div class="container py-3 pb-5 border-1 my-3 text-bg-warning rounded-2">
+    <h5 class="mb-3">Do you Want To Change Quantity Of This Product</h5>
+    <form class="" #f="ngForm" (ngSubmit)="sendQuantity(f)">
+        <div class="mb-3">
+            <label class="form-label fw-semibold me-2">
+                ADD <input ngModel [(ngModel)]="changeValue" type="radio" name="change" value="add">
+            </label>
+            <label class="form-label fw-semibold me-2">
+                REMOVE <input ngModel [(ngModel)]="changeValue" type="radio" name="change" value="remove">
+            </label>
+        </div>
+        <div class="mb-3">
+            <label for="changedQuantity" class="form-label">Change Quantity</label>
+            <input type="number" required min="1" id="changedQuantity" name="changedQuantity" class="form-control"
+                ngModel>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary float-end">Do the change</button>
+        </div>
+    </form>
+</div>

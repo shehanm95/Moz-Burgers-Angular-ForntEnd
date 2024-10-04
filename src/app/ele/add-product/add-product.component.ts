@@ -1,7 +1,8 @@
-import { Component, NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { getProductCategories } from '../../service/product-service.service';
 
 @Component({
   selector: 'app-add-product',
@@ -11,11 +12,7 @@ import { CommonModule } from '@angular/common';
   standalone: true
 })
 export class AddProductComponent {
-  categories = [
-    { id: 1, name: 'Electronics' },
-    { id: 2, name: 'Books' },
-    { id: 3, name: 'Clothing' }
-  ];
+  categories = getProductCategories
 
   imageUrl: string | ArrayBuffer | null = "/assets/images/tempBurg.webp";
   imageFile: File | null = null;

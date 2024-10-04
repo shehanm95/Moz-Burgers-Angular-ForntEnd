@@ -1,23 +1,46 @@
-<div class="product-card d-inline-block container mt-5 mx-2">
+<div class="product-card rounded-2 d-inline-block container mt-3 mx-2">
     <div class="card" style="width: 18rem;">
-        <img [src]="productBaseUrl+'/getImage/'+product.imagePath" class="card-img-top" alt="{{product.imagePath}}">
-        <div class="card-body">
+        <div class="img-area d-flex justify-content-center align-items-center">
+            <img [src]="productBaseUrl+'/getImage/'+product.imagePath" alt="{{product.imagePath}}">
 
-            <h5 class="card-title">{{product.name}}</h5>
-            <p>cart quantity : {{product.cartQuantity}}</p>
-            <p> quantity : {{product.quantity}}</p>
-            <p class="card-text">description is here
+        </div>
+        <div class="card-body p-1">
+
+            <h5 class="card-title">{{product.name.substring(0,24)}}</h5>
+            <p class="card-text">{{product.description.substring(0,18)}}
             </p>
-            <div class="d-flex justify-content-between">
-                <a (click)="viewProduct(product.id)" class="btn btn-primary">View Details</a>
-                <a (click)="addToCart(product)" class="btn btn-primary">Add to Cart</a>
+            <div class="priceArea">
+                <h4 class="d-inline-block">{{product.price | currency:'Rs.'}}</h4>
+                <h5 [ngClass]="outOfStock ? 'text-danger' : 'text-info'" class="d-inline-block float-end me-3 fw-bold">
+                    {{quantityString}}</h5>
+            </div>
+            <div class="d-flex p-0">
+                <a (click)="viewProduct(product.id)" class="btn btn-primary float-start">View Details</a>
+                <button type="button" (click)="addToCart(product)" [disabled]="outOfStock"
+                    class="btn btn-primary float-end ms-5">Add to Cart</button>
             </div>
         </div>
     </div>
-</div>
 
-<style>
-    .product-card {
-        max-width: 286px;
-    }
-</style>
+    <style>
+        .card,
+        .product-card {
+            overflow: hidden;
+            max-width: 286px;
+            height: 384px;
+            display: inline-block;
+        }
+
+        .img-area {
+            height: 222px;
+            overflow: hidden;
+        }
+
+        .img-area img {
+            max-width: 300px;
+            min-width: 280px;
+            max-height: 250px;
+            min-height: 222px;
+            overflow: hidden;
+        }
+    </style>

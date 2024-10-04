@@ -1,13 +1,32 @@
-<div class="container my-sm-2">
+<div class="container my-sm-2 filters">
     <div class="header d-flex form px-5">
         <label class="fw-semibold" for="searchInput">Search Products </label>
-        <input id="searhInput" name="searchInput" class="form-control" type="text">
+        <input [(ngModel)]="searchText" (keyup)="setSearchObject()" id="searhInput" name="searchInput"
+            class="form-control" type="text">
         <button class="btn btn-primary ms-1">search</button>
     </div>
+    <div class="container filterButtons d-flex justify-content-around pt-2">
+        <button [ngClass]="selectedButton != '0' ? 'btn-light': 'btn-primary'" (click)="setSelectedButton('0')"
+            class="btn">All</button>
+        <button [ngClass]="selectedButton != '1' ? 'btn-light': 'btn-primary'" class="btn"
+            (click)="setSelectedButton('1')">Burger</button>
+        <button [ngClass]="selectedButton != '2' ? 'btn-light': 'btn-primary'" class="btn"
+            (click)="setSelectedButton('2')">Beverages</button>
+        <button [ngClass]="selectedButton != '3' ? 'btn-light': 'btn-primary'" class="btn"
+            (click)="setSelectedButton('3')">Chicken</button>
+    </div>
 </div>
-
 <style>
     #searchInput {
         width: 80% !important;
+    }
+
+    .filters {
+        background-color: rgba(250, 235, 215, 0.248);
+        padding: 10px 0 10px 0;
+    }
+
+    .filterButtons button {
+        width: 100px;
     }
 </style>

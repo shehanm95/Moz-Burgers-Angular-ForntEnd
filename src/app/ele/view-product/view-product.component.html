@@ -1,47 +1,63 @@
-<div class="container">
+<div class="container d-block check pb-5 mb-3">
     <h2 class=" mt-5 pt-3">Add Product</h2>
-    <form #f="ngForm" (ngSubmit)="submit(f)">
+    <form #f="ngForm" id="updateProductForm" (ngSubmit)="submit(f,product)">
         <div class="mb-3 d-none">
             <label for="id" class="form-label">ID</label>
-            <input type="text" id="id" name="id" class="form-control" [(ngModel)]="product.id">
+            <input type="text" id="id" name="id" class="form-control" [disabled]="isDisabled" [(ngModel)]="product.id">
         </div>
 
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="text" id="name" name="name" class="form-control" [ngModel]="product.name">
+            <input required minlength="3" type="text" id="name" name="name" class="form-control" [disabled]="isDisabled"
+                [ngModel]="product.name">
         </div>
 
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea id="description" name="description" class="form-control"
-                [ngModel]="product.description"></textarea>
+            <textarea required minlength="3" id="description" name="description" class="form-control"
+                [disabled]="isDisabled" [ngModel]="product.description"></textarea>
         </div>
 
         <div class="mb-3">
             <label for="category" class="form-label">Category</label>
-            <select id="category" name="category" class="form-select" [ngModel]="product.category">
+            <select id="category" name="category" class="form-select" [disabled]="isDisabled"
+                [ngModel]="product.category">
                 <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
             </select>
         </div>
 
         <div class="mb-3">
             <label for="image" class="form-label">Product Image</label>
-            <input type="file" id="image" name="image" class="form-control" (change)="onImageUpload($event)">
+            <input type="file" id="image" name="image" class="form-control" [disabled]="isDisabled"
+                (change)="onImageUpload($event)">
             <div class="mt-3">
                 <img [src]="imageUrl" alt="Product Image" class="img-thumbnail" />
             </div>
         </div>
 
         <div class="mb-3">
-            <label for="quantity" class="form-label">Quantity</label>
-            <input type="number" id="quantity" name="quantity" class="form-control" [ngModel]="product.cartQuantity">
+            <label for="quantity" class="form-label">Available Quantity</label>
+            <input type="number" id="quantity" name="quantity" class="form-control" [disabled]="!saving"
+                [ngModel]="product.quantity - product.cartQuantity">
         </div>
 
         <div class="mb-3">
             <label for="price" class="form-label">Price</label>
-            <input type="number" id="price" name="price" class="form-control" [ngModel]="product.price" />
+            <input type="number" id="price" name="price" class="form-control" [disabled]="isDisabled"
+                [ngModel]="product.price" />
         </div>
 
-        <button type="submit" class="btn btn-primary">Add Product</button>
+        <div class="buttons float-end mb-5">
+            <button type="button" (click)="deleteProduct(product.id)"
+                [ngClass]="isDisabled ? 'd-none' : 'd-inline-block'" class="btn float-start me-1 btn-danger ms-1">Delete
+                Product</button>
+            <button type="submit" [ngClass]="isDisabled ? 'd-none' : 'd-inline-block'"
+                class="btn btn-primary ms-1">Update
+                Product</button>
+            <button type="button" (click)="toggleFormEnable()" [innerText]="editButtonValue"
+                [ngClass]="isDisabled ? 'btn-warning' : 'btn-danger'" class="btn ms-1 float-end"></button>
+        </div>
     </form>
 </div>
+<hr class="mt-5">
+<app-add-quantity (onQuantityChanged)="saveQuantityToDB($event)"></app-add-quantity>
