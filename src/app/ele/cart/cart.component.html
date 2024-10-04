@@ -1,30 +1,38 @@
-<div class="container mt-5 pt-3  mytable">
-    <h2 class="mb-4">Shopping Cart</h2>
-    <table class="table">
+<app-set-cart-customer></app-set-cart-customer>
+<div class="container mt-1 pt-1  mytable">
+    <h2 class="mb-4 d-print-none">Shopping Cart</h2>
+    <table class="table container">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">Product</th>
+                <th class="" scope="col">Product</th>
                 <th scope="col">Name</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Price</th>
                 <th scope="col">Subtotal</th>
-                <th scope="col">Action</th>
+                <th class="d-print-none" scope="col">Action</th>
             </tr>
         </thead>
         <tbody *ngIf="length > 0">
             <tr *ngFor="let product of (products$ | async)">
-                <td><img class="cartItemImg d-inline-block"
+                <td class=""><img class="cartItemImg d-inline-block"
                         [src]="'http://localhost:8080/product/getImage/'+product.imagePath" alt="Product 2"
                         class="img-fluid"></td>
                 <td>{{product.name}}</td>
                 <td>
-                    <input type="number" class="form-control" (change)="quantityInput = product.cartQuantity"
-                        (input)="makeQuantityChange($event,product)" value="{{product.cartQuantity}}" min="1">
+                    <button (click)="makeQuantityChangeSub(product.cartQuantity,product)"
+                        class="cart-Btn d-print-none  btn btn-primary small fw-medium">-</button>
+
+                    <h5 class="d-inline-block px-4">{{product.cartQuantity.toString().padStart(2, '0')}}</h5>
+
+                    <button [disabled]="(product.quantity -product.cartQuantity) == 0"
+                        (click)="makeQuantityChange(product)"
+                        class="cart-Btn d-print-none btn btn-primary small fw-medium">+</button>
+
                 </td>
-                <td>{{product.price}}</td>
-                <td>{{product.price * product.cartQuantity}}</td>
-                <td class="">
-                    <button class="btn btn-danger btn-sm" (click)="removeProduct(product)">Remove</button>
+                <td class="text-right">{{product.price}}</td>
+                <td class="text-right">{{(product.price * product.cartQuantity) | currency:'Rs. ' }}</td>
+                <td>
+                    <button class="btn btn-danger d-print-none btn-sm" (click)="removeProduct(product)">Remove</button>
                 </td>
             </tr>
             <tr class="d-none">
@@ -35,15 +43,15 @@
                 </td>
                 <td>k</td>
                 <td>k</td>
-                <td class="">
-                    <button class="btn btn-danger btn-sm">Remove</button>
+                <td>
+                    <button class="btn btn-danger btn-sm d-print-none">Remove</button>
                 </td>
             </tr>
 
             <tr>
                 <td colspan="4" class="text-right"><strong>Total:</strong></td>
-                <td>$25.00</td>
-                <td>{{length}}</td>
+                <td class="d-print-none">Items : {{length.toString().padStart(2, '0')}}</td>
+                <td class="">{{subTotal| currency:'Rs. ' }}</td>
             </tr>
         </tbody>
 
@@ -54,11 +62,21 @@
     </div>
 </div>
 <div class="container d-flex justify-content-between mt-3">
-    <a href="#" class="btn btn-secondary">Continue Shopping</a>
-    <a href="#" *ngIf="length > 0" class="btn btn-primary">Checkout</a>
+    <button routerLink="/" class="btn btn-secondary d-print-none">Continue Shopping</button>
+    <button (click)="print()" *ngIf="length > 0" class="btn btn-primary  d-print-none">Checkout</button>
 </div>
 
+<p class="container mySmall d-none d-print-block text-end">Please note that a signature is not required, as this
+    document is
+    intended for
+    printing purposes only.</p>
+<h6 class="container d-none d-print-block text-end">Manager Shehan.</h6>
+
 <style>
+    .mySmall {
+        font-size: 8px;
+    }
+
     tr {
         border: 1px solid #ccc;
         width: 100%;
@@ -80,6 +98,8 @@
     td img {
         height: 40px !important;
     }
-</style>
 
-<button routerLink="/">go to Home</button>
+    .art-Btn {
+        width: 50px;
+    }
+</style>

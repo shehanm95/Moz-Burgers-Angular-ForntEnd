@@ -2,16 +2,18 @@ import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CustomerService } from '../../service/customer-service.service';
 import { CommonModule } from '@angular/common';
+import { SucsessComponent } from "../../common/sucsess/sucsess.component";
 
 @Component({
   selector: 'app-add-customer',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, SucsessComponent],
   templateUrl: './add-customer.component.html',
   styleUrl: './add-customer.component.css'
 })
 export class AddCustomerComponent {
   showForm: boolean = false;
+  successful: boolean = false;
   toggleForm() {
     this.showForm = !this.showForm;
   }
@@ -28,6 +30,7 @@ export class AddCustomerComponent {
         (response) => {
           console.log('Customer added successfully:', response);
           form.reset();
+          this.successful = true;
           this.customerSubmittedHandler.emit()// Optionally reset the form after submission
         },
         (error) => {

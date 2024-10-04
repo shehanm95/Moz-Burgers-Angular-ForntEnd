@@ -3,12 +3,13 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { getProductCategories } from '../../service/product-service.service';
+import { SucsessComponent } from "../../common/sucsess/sucsess.component";
 
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.css'],
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, SucsessComponent],
   standalone: true
 })
 export class AddProductComponent {
@@ -17,6 +18,7 @@ export class AddProductComponent {
   imageUrl: string | ArrayBuffer | null = "/assets/images/tempBurg.webp";
   imageFile: File | null = null;
   defaultId: number = -1;
+  successful: boolean = false;
 
   constructor(private http: HttpClient) { }
 
@@ -46,6 +48,9 @@ export class AddProductComponent {
       this.http.post('http://localhost:8080/product/add', formData)
         .subscribe(response => {
           console.log('Product added successfully', response);
+          f.reset()
+          this.successful = true;
+          setTimeout(() => { location.reload(); }, 3000)
         }, error => {
           console.error('Error adding product', error);
         });

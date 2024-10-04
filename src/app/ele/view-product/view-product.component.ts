@@ -1,6 +1,6 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, inject, Input, ViewChild } from '@angular/core';
 import { getProductCategories, IProduct, productBaseUrl, ProductServiceService } from '../../service/product-service.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormsModule, NgForm } from '@angular/forms';
 import { AddQuantityComponent } from "../add-quantity/add-quantity.component";
@@ -8,19 +8,26 @@ import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { appState } from '../../appState';
+import { SucsessComponent } from "../../common/sucsess/sucsess.component";
 
 @Component({
   selector: 'app-view-product',
   standalone: true,
-  imports: [CommonModule, FormsModule, AddQuantityComponent],
+  imports: [CommonModule, FormsModule, AddQuantityComponent, SucsessComponent],
   templateUrl: './view-product.component.html',
   styleUrl: './view-product.component.css'
 })
 export class ViewProductComponent {
+  successful: boolean = false;
+  router: Router = inject(Router);
   deleteProduct(id: number) {
     this.http.delete(`http://localhost:8080/product/delete/${id}`)
       .subscribe(response => {
         console.log('Product deleted successfully', response);
+        this.successful = true
+        setTimeout(() => {
+          this.router.navigate([''])
+        }, 1000)
       }, error => {
         console.error('Error deleting product', error);
       });
@@ -38,7 +45,9 @@ export class ViewProductComponent {
     this.product.quantity += quantity;
     this.isDisabled = false;
     console.log(this.product)
+    setTimeout(() => {
 
+    }, 1000)
     this.saveJsonProduct(this.product);
 
 
@@ -124,6 +133,7 @@ export class ViewProductComponent {
           console.log('Product updated successfully', response);
           this.saving = false;
           this.isDisabled = true;
+          this.successful = true;
         }, error => {
           console.error('Error updating product', error);
         });

@@ -1,0 +1,75 @@
+<div class="container d-print-none bg-warning bg-opacity-25 p-3 mt-5">
+    <h4>Set Customer for the Order.</h4>
+    <form>
+        <input type="text" (keydown)="displayCustomers()" ngModel [(ngModel)]="searchVal" name="custName"
+            class="form-control" id="custName" placeholder="search customer name here....">
+        <div *ngIf="searchVal != ''" class="displaySelection bg-info bg-opacity-10">
+            <div *ngFor="let customer of (filteredCustomers$  | async)" (click)="setCustomer(customer)"
+                class="border border-1 border-primary">
+                {{customer.firstName +" " +customer.lastName}}</div>
+        </div>
+    </form>
+</div>
+
+
+<div *ngIf="selectedCustomer != null" class="customerDetails">
+    <div class="container mt-5">
+        <div class="invoice-header text-center">
+            <h1 class="invoice-title">INVOICE</h1>
+            <p class="company-details">
+                Moz Burgers<br>
+                123, Panadura<br>
+                <strong>Phone:</strong> 072 - 976 30 93<br>
+                <strong>Web Site:</strong> mozBordures.com
+            </p>
+        </div>
+
+        <div class="row customer-address">
+            <div class="col-md-6">
+                <h5>Bill To:</h5>
+                <p>
+                    {{selectedCustomer.address}}
+                </p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <h5 class="invoice-number">Invoice Number: 001234</h5>
+                <p><strong>Date:</strong> October 5, 2024</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .invoice-header {
+        background-color: #4CAF50;
+        /* Green background */
+        color: white;
+        /* White text */
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .displaySelection {
+        max-height: 60px;
+    }
+
+    .invoice-title {
+        font-size: 36px;
+        font-weight: bold;
+        margin: 0;
+    }
+
+    .company-details {
+        margin-top: 10px;
+    }
+
+    .customer-address {
+        margin-top: 20px;
+    }
+
+    .invoice-number {
+        font-weight: bold;
+        font-size: 18px;
+    }
+</style>

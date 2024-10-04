@@ -5,15 +5,20 @@ import { appState } from '../../appState';
 import { selectCartProducts } from '../../state/cartState/cart.selector';
 import { Observable } from 'rxjs';
 import { IProduct } from '../../service/product-service.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.css'
 })
 export class NavComponent {
+  showNavBar: boolean = true;
+  toggleNavBar() {
+    this.showNavBar = !this.showNavBar;
+  }
   products$: Observable<IProduct[]>;
   products!: IProduct[];
   quantity: number = 0;

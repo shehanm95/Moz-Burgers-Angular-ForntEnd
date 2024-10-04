@@ -34,6 +34,7 @@ export class CustomersComponent {
   deleteCustomer(id: number) {
     console.log('delete' + id)
     this.customerService.deleteCustomer(id);
+    this.rebuildTemplate()
     this.refreshList()
     this.rebuildTemplate()
   }

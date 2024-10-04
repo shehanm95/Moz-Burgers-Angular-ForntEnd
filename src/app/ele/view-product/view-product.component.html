@@ -1,4 +1,4 @@
-<div class="container d-block check pb-5 mb-3">
+<div class="container d-block pb-5 mb-3">
     <h2 class=" mt-5 pt-3">Add Product</h2>
     <form #f="ngForm" id="updateProductForm" (ngSubmit)="submit(f,product)">
         <div class="mb-3 d-none">
@@ -57,7 +57,10 @@
             <button type="button" (click)="toggleFormEnable()" [innerText]="editButtonValue"
                 [ngClass]="isDisabled ? 'btn-warning' : 'btn-danger'" class="btn ms-1 float-end"></button>
         </div>
+
+
     </form>
+    <app-sucsess *ngIf="successful">You Updated the Product successfully...</app-sucsess>
 </div>
 <hr class="mt-5">
 <app-add-quantity (onQuantityChanged)="saveQuantityToDB($event)"></app-add-quantity>

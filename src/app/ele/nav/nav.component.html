@@ -1,11 +1,19 @@
-<nav class="mynav container-fluid navbar-dark bg-dark">
+<nav class="mynav d-print-none container-fluid navbar-dark bg-dark">
     <nav class="container navbar navbar-dark navbar-expand-lg">
-        <a class="navbar-brand flex-grow-1" routerLink="/">Moz Burgers</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <ul class="navbar-nav mr-auto">
+
+
+        <div class="d-block w-100">
+            <a class="navbar-brand flex-grow-1" routerLink="/">Moz Burgers</a>
+
+            <button (click)="toggleNavBar()" class="navbar-toggler float-end" type="button" data-toggle="collapse"
+                data-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+
+        <ul [ngClass]="{'myNav' : showNavBar}" class="navbar-nav d-flex mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" routerLink="/addProduct">AddProduct</a>
             </li>
@@ -47,5 +55,11 @@
         display: inline-block;
         text-align: center;
         width: 100%;
+    }
+
+    @media (max-width : 992px) {
+        .myNav {
+            display: none !important;
+        }
     }
 </style>
