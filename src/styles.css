@@ -16,3 +16,7 @@
 .justify-between {
     justify-content: space-between;
 }
+
+form .ng-invalid.ng-touched {
+    border: 2px solid red;
+}

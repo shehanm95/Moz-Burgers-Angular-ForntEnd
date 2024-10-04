@@ -3,10 +3,15 @@ import { HomeComponent } from './ele/home/home.component';
 import { CartComponent } from './ele/cart/cart.component';
 import { AddProductComponent } from './ele/add-product/add-product.component';
 import { ViewProductComponent } from './ele/view-product/view-product.component';
+import { CustomersComponent } from './cust/customers/customers.component';
 
 export const routes: Routes = [
     { path: "", component: HomeComponent },
     { path: "addProduct", component: AddProductComponent },
     { path: "viewProduct/:id", component: ViewProductComponent },
-    { path: "cart", component: CartComponent }
+    { path: "cart", component: CartComponent },
+
+
+
+    { path: "customers", component: CustomersComponent },
 ];

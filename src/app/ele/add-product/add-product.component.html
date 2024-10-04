@@ -13,13 +13,13 @@
 
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea required minlength="3" maxlength="30" id=" description" name="description" class="form-control"
+            <textarea minlength="3" maxlength="30" id=" description" name="description" class="form-control"
                 ngModel></textarea>
         </div>
 
         <div class="mb-3">
             <label for="category" class="form-label">Category</label>
-            <select id="category" name="category" class="form-select" ngModel>
+            <select id="category" required name="category" class="form-select" ngModel>
                 <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
             </select>
         </div>
@@ -34,14 +34,21 @@
 
         <div class="mb-3">
             <label for="quantity" class="form-label">Quantity</label>
-            <input type="number" id="quantity" name="quantity" class="form-control" ngModel>
+            <input type="number" required id="quantity" name="quantity" class="form-control" ngModel>
         </div>
 
         <div class="mb-3">
             <label for="price" class="form-label">Price</label>
-            <input type="number" id="price" name="price" class="form-control" ngModel />
+            <input type="number" required id="price" name="price" class="form-control" ngModel />
         </div>
 
-        <button type="submit" class="btn btn-primary">Add Product</button>
+        <div *ngIf="f.touched && f.invalid" class="alert alert-danger bg-danger bg-opacity-75 pb-0 ">
+            <ul class="pb-0">
+                <li class="h5">You must fill all necessary fields marked in red.. </li>
+                <li class="h5 pb-0">You must upload a image as well.. </li>
+            </ul>
+        </div>
+
+        <button type="submit" class="btn btn-primary float-end">Add Product</button>
     </form>
 </div>

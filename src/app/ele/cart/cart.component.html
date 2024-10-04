@@ -18,8 +18,8 @@
                         class="img-fluid"></td>
                 <td>{{product.name}}</td>
                 <td>
-                    <input type="number" class="form-control" (change)="makeQuantityChange($event,product)"
-                        value="{{product.cartQuantity}}" min="1">
+                    <input type="number" class="form-control" (change)="quantityInput = product.cartQuantity"
+                        (input)="makeQuantityChange($event,product)" value="{{product.cartQuantity}}" min="1">
                 </td>
                 <td>{{product.price}}</td>
                 <td>{{product.price * product.cartQuantity}}</td>

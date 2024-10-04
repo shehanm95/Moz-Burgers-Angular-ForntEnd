@@ -1,0 +1,58 @@
+<div class="container mt-5 pt-3">
+    <h3>Customers</h3>
+    <app-add-customer (customerSubmittedHandler)="refreshList()"></app-add-customer>
+
+</div>
+<div class="container">
+
+    <h4 class="h4 my-4">Customer List</h4>
+    <div class=" customerList mt-5">
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Customer Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Address</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="isComponentVisible">
+            <tr class="d-none">
+                <td>1</td>
+                <td>John Doe</td>
+
+                <td>john.doeAtexample.com</td>
+                <td>(555) 123-4567</td>
+                <td>123 Main St, Springfield, IL</td>
+                <td>
+                    <button class="btn btn-info mx-1 btn-sm">View Orders</button>
+                    <button class="btn btn-warning mx-1 btn-sm">Edit</button>
+                    <button class="btn btn-danger mx-1 btn-sm">Delete</button>
+                </td>
+            </tr>
+            <tr *ngFor="let customer of (customers$ | async)">
+                <td>{{customer.id}}</td>
+                <td>{{customer.firstName +" "+ customer.lastName}}</td>
+
+                <td>{{customer.email}}</td>
+                <td>{{customer.phone}}</td>
+                <td>{{customer.address}}</td>
+                <td>
+                    <button class="btn btn-info mx-1 btn-sm">View Orders</button>
+                    <button class="btn btn-warning mx-1 btn-sm">Edit</button>
+                    <button (click)="deleteCustomer(customer.id)" class="btn btn-danger mx-1 btn-sm">Delete</button>
+                </td>
+            </tr>
+            <!-- Additional entries can go here -->
+        </tbody>
+    </table>
+    <div *ngIf="(customers$ | async)?.length === 0"
+        class="noCustomers d-flex justify-content-center align-items-center container">
+        <h5>No Customers To Show...</h5>
+    </div>
+
+
+</div>

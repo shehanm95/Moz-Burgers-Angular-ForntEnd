@@ -1,0 +1,78 @@
+<div class="addCustomer rounded-3">
+    <div class="header p-4 rounded-3">
+        <h5 class="d-inline-block">Here You Can Add Customer...</h5>
+        <button (click)="toggleForm()" [ngClass]="!showForm ? 'btn-primary' : 'btn-secondary'"
+            [value]="!showForm ? 'Show Customer Form' : 'Hide Customer Form'" class="btn  float-end"> {{ !showForm ?
+            'Show Customer Add Form' : 'Hide Customer Form' }}</button>
+    </div>
+    <div *ngIf="showForm" class="formBody">
+        <div class="card-body">
+            <form class="mb-5 p-3" #f="ngForm" (ngSubmit)="submit(f)">
+                <div class="mb-3">
+                    <label for="id" class="form-label d-none">ID</label>
+                    <input [(ngModel)]="defaultId" type="hidden" class="form-control" name="id" id="id">
+                </div>
+                <div class="mb-3">
+                    <label required for="firstName" class="form-label">First Name</label>
+                    <input ngModel type="text" class="form-control" name="firstName" id="firstName" required>
+                    <div class="invalid-feedback">
+                        Please enter your first name.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input ngModel type="text" class="form-control" name="lastName" id="lastName">
+                    <div class="invalid-feedback">
+                        Please enter your last name.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input ngModel type="email" class="form-control" name="email" id="email">
+                    <div class="invalid-feedback">
+                        Please enter a valid email address.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input ngModel type="number" maxlength="10" class="form-control" name="phone" id="phone" required>
+                    <div class="invalid-feedback">
+                        Please enter your phone number.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <textarea ngModel class="form-control" name="address" id="address" rows="3"></textarea>
+                    <div class="invalid-feedback">
+                        Please enter your address.
+                    </div>
+                </div>
+
+                <div *ngIf="f.touched && f.invalid" class="alert alert-danger bg-danger bg-opacity-75 ">
+                    <ul>
+                        <li class="h5">Customer name and phone number are required fields in here..</li>
+                    </ul>
+                </div>
+
+                <button type="submit" class="btn btn-primary m-2 float-end">Register</button>
+            </form>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<style>
+    .header {
+        background-color: #ccc;
+    }
+
+    .addCustomer {
+        border: 2px solid #949494;
+    }
+</style>

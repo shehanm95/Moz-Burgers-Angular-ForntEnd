@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { appState } from '../../appState';
 import { selectCartProducts } from '../../state/cartState/cart.selector';
@@ -16,18 +16,27 @@ import { addToCart, removeFromCart } from '../../state/cartState/cart.action';
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
   products$: Observable<IProduct[]>;
   length: number = 0;
+  quantityInput?: number;
   constructor(private store: Store<appState>) {
     this.products$ = this.store.select(selectCartProducts);
     this.products$.subscribe(products => {
       this.length = products.length;
     });
   }
+  ngOnInit(): void {
+    if (this.product) {
+      this.quantityInput = this.product.cartQuantity; // Assign cart quantity from product
+    }
+
+  }
 
   makeQuantityChange($event: Event, product: IProduct) {
-    this.store.dispatch(addToCart({ product }));
+    console.log()
+
+    //this.store.dispatch(addToCart({ product }));
   }
 
   removeProduct(product: IProduct) {
