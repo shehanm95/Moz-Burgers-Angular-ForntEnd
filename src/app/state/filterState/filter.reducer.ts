@@ -7,7 +7,7 @@ export interface filterState { searchText: string, searchBtn: string }
 
 export const initialState: filterState = {
     searchText: "",
-    searchBtn: "1"
+    searchBtn: "0"
 }
 
 export const filterReducer = createReducer(

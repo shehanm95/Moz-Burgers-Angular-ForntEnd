@@ -4,7 +4,7 @@
     <h6 *ngIf="searchObj?.searchText">Showing Results for : {{searchObj.searchText}}..</h6>
 </div>
 <div class="d-flex justify-content-start">
-    <ng-content *ngFor="let product of (products| async)">
+    <ng-content *ngFor="let product of (filteredProducts|async)">
         <app-product [product]="product" (handleAdd)="addToCart($event)"></app-product>
     </ng-content>
 </div>
